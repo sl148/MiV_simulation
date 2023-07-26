@@ -72,6 +72,13 @@ def generate_launch_description():
         arguments=["joint_trajectory_controller"],
         output="screen",
     )
+
+    spawn_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_trajectory_controller"],
+        output="screen",
+    )
     # Run the nodes
     return LaunchDescription([
         # SetEnvironmentVariable(name='GAZEBO_MODEL_PATH', value=model_path),

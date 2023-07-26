@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="my_robot">
+    <static>true</static>
+    <link name='chassis'>
+      <pose>0 0 0.1 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>0.4 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.4 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+      <!-- Add a depth camera sensor -->
+      <sensor name="depth_camera_sensor" type="depth">
+        <always_on>true</always_on>
+        <!-- Set the horizontal and vertical field of view -->
+        <horizontal_fov>1.05</horizontal_fov>
+        <vertical_fov>0.75</vertical_fov>
+        <!-- Set the image size -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <!-- Set the depth camera properties -->
+        <depth>
+          <near>0.1</near>
+          <far>100.0</far>
+        </depth>
+        <!-- Set the update rate of the camera -->
+        <update_rate>30.0</update_rate>
+        <!-- Add a plugin to interface with ROS2 -->
+        <plugin name="ros2_camera_plugin" filename="libgazebo_ros2_camera.so">
+          <ros2>
+            <namespace>/</namespace>
+            <topic>/camera/depth/image_raw</topic>
+            <frame_name>camera_depth_optical_frame</frame_name>
+            <update_rate>30.0</update_rate>
+            <camera_info_topic>/camera/depth/camera_info</camera_info_topic>
+          </ros2>
+        </plugin>
+      </sensor>
+    </link>
+  </model>
+</sdf>

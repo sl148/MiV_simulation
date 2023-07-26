@@ -46,6 +46,9 @@ def main():
     if 'garage' in request.name:
         object_file = os.path.join(
         pkg_share, "models","garage", "model.sdf")
+    if 'camera' in request.name:
+        object_file = os.path.join(
+        pkg_share, "models","camera", "model.sdf")
         
     request.xml = open(object_file, 'r').read()
 
