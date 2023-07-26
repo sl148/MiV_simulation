@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mea">
+
+  <xacro:macro name="mea"
+    params="description_pkg:='gantry_test'">
+
+  <!-- Define the cylindrical object -->
+  <xacro:property name="radius" value="3"/> <!-- Radius of the cylinder -->
+  <xacro:property name="height" value="2"/> <!-- Height of the cylinder -->
+
+  <link name="cylinder_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${radius}" length="${height}"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${radius}" length="${height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Define the joint to connect this object to its parent -->
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="cylinder_link"/>
+  </joint>
+
+  </xacro:macro>
+
+</robot>
